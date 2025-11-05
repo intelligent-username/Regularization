@@ -95,37 +95,37 @@ A norm-regularized function will probably be more robust and also faster to trai
   
 $$\mathcal{L}_{\text{reg}} = \lambda\,\lVert w \rVert_1 = \lambda\sum_{i}|w_i|$$
 
-*where $w_i$ are individual weight components.*
+where $w_i$ are individual weight components.
 
 #### L2
   
 $$\mathcal{L}_{\text{reg}} = \tfrac{\lambda}{2}\,\lVert w \rVert_2^2 = \tfrac{\lambda}{2}\sum_i w_i^2$$
 
-*where the 1/2 factor simplifies gradient computation.*
+where the 1/2 factor simplifies gradient computation.
 
 #### Elastic Net
   
 $$\mathcal{L}_{\text{reg}} = \lambda_1\,\lVert w \rVert_1 + \tfrac{\lambda_2}{2}\,\lVert w \rVert_2^2$$
 
-*where $\lambda_1$ controls L1 penalty, $\lambda_2$ controls L2 penalty.*
+where $\lambda_1$ controls L1 penalty, $\lambda_2$ controls L2 penalty.
 
 #### Max-norm
   
 $$\text{constraint: } \lVert w \rVert_2 \le c\quad\text{or penalty: }\; \mathcal{L}_{\text{reg}} = \lambda\,\max\{0,\, \lVert w \rVert_2 - c\}$$
 
-*where $c$ is the maximum allowed norm.*
+where $c$ is the maximum allowed norm.
 
 #### Group Lasso
   
 $$\mathcal{L}_{\text{reg}} = \lambda\sum_{g} \lVert w_{g} \rVert_2$$
 
-*where $g$ indexes groups of weights $w_g$.*
+where $g$ indexes groups of weights $w_g$.
 
 #### Nuclear norm
   
 $$\mathcal{L}_{\text{reg}} = \lambda\,\lVert W \rVert_* = \lambda\sum_{i} \sigma_i(W)$$
 
-*where $W$ is a weight matrix, $\sigma_i(W)$ are its singular values.*
+where $W$ is a weight matrix, $\sigma_i(W)$ are its singular values.
 
 ### Noise
 
@@ -225,19 +225,19 @@ $$\mathcal{L}_{\text{LS}} = -\sum_{k=1}^{K} \tilde{y}_k\,\log p_k,\quad \tilde{y
 \dfrac{\varepsilon}{K-1}, & k\ne y
 \end{cases}$$
 
-*where $\varepsilon$ is smoothing parameter, $K$ is number of classes, $\tilde{y}_k$ are smoothed labels, $p_k$ are predicted probabilities.*
+where $\varepsilon$ is smoothing parameter, $K$ is number of classes, $\tilde{y}_k$ are smoothed labels, $p_k$ are predicted probabilities.
 
 #### Confidence Penalty
   
 $$\mathcal{L}_{\text{CP}} = \mathcal{L}_{\text{CE}} - \beta\,\mathcal{H}(p)\;=\; -\sum_k y_k\log p_k\; +\; \beta\sum_k p_k\log p_k$$
 
-*where $\beta$ controls entropy penalty, $\mathcal{H}(p)$ is prediction entropy.*
+where $\beta$ controls entropy penalty, $\mathcal{H}(p)$ is prediction entropy.
 
 #### Focal loss
   
 $$\mathcal{L}_{\text{FL}} = -\alpha_t\,(1-p_t)^{\gamma}\,\log p_t$$
 
-*where $\alpha_t$ is class weight, $\gamma$ focuses on hard examples, $p_t$ is probability for true class.*
+where $\alpha_t$ is class weight, $\gamma$ focuses on hard examples, $p_t$ is probability for true class.
 
 ### Gradient
 
@@ -247,25 +247,25 @@ Gradient regularization is a set of mathematical tricks that change the loss fun
   
 $$\mathcal{L}_{\text{Jac}} = \lambda\,\mathbb{E}_{x}\big[\,\lVert J_{f}(x) \rVert_F^2\,\big] = \lambda\,\mathbb{E}_{x}\bigg[\sum_{i,j}\Big(\frac{\partial f_i(x)}{\partial x_j}\Big)^2\bigg]$$
 
-*where $J_f(x)$ is the Jacobian of function $f$ w.r.t. $x$.*
+where $J_f(x)$ is the Jacobian of function $f$ w.r.t. $x$.
 
 #### Orthogonality
   
 $$\mathcal{L}_{\text{Orth}} = \lambda\,\lVert W^\top W - I \rVert_F^2$$
 
-*where $W$ is weight matrix, $I$ is identity matrix.*
+where $W$ is weight matrix, $I$ is identity matrix.
 
 #### Spectral norm
   
 $$\text{constraint: } \lVert W \rVert_2 \le c\quad\text{or penalty: }\; \mathcal{L}_{\text{SN}} = \lambda\,\lVert W \rVert_2$$
 
-*where $c$ is maximum spectral norm.*
+where $c$ is maximum spectral norm.
 
 #### Gradient penalties
   
 $$\mathcal{L}_{\text{GP}} = \lambda\,\mathbb{E}_{\hat{x}}\big[\big(\lVert \nabla_{\hat{x}} D(\hat{x}) \rVert_2 - 1\big)^2\big]$$
 
-*where $\hat{x}$ are generated samples, $D$ is discriminator, $\nabla$ denotes gradient.*
+where $\hat{x}$ are generated samples, $D$ is discriminator, $\nabla$ denotes gradient.*
 
 ### Representation
 
@@ -277,25 +277,25 @@ A representation-regularized model is often not only more interpretable but also
   
 $$\mathcal{L}_{\text{Contr}} = y\,\lVert z_i - z_j \rVert_2^2 + (1-y)\,[\max\{0,\, m - \lVert z_i - z_j \rVert_2\}]^2$$
 
-*where $y$ is similarity label, $z_i, z_j$ are embeddings, $m$ is margin.*
+where $y$ is similarity label, $z_i, z_j$ are embeddings, $m$ is margin.
 
 #### Center loss
   
 $$\mathcal{L}_{\text{Center}} = \tfrac{1}{2}\sum_i \lVert x_i - c_{y_i} \rVert_2^2$$
 
-*where $x_i$ are features, $c_{y_i}$ is center for class $y_i$.*
+where $x_i$ are features, $c_{y_i}$ is center for class $y_i$.*
 
 #### Manifold
   
 $$\mathcal{L}_{\text{Manifold}} = \tfrac{1}{2}\sum_{i,j} S_{ij}\,\lVert z_i - z_j \rVert_2^2 \;=\; \mathrm{Tr}(Z^\top L Z)$$
 
-*where $S_{ij}$ is similarity matrix, $Z$ is embedding matrix, $L$ is graph Laplacian.*
+where $S_{ij}$ is similarity matrix, $Z$ is embedding matrix, $L$ is graph Laplacian.
 
 #### Subspace regularization
   
 $$\mathcal{L}_{\text{Subspace}} = \lambda\,\lVert Z - UU^\top Z \rVert_F^2,\quad U^\top U=I$$
 
-*where $U$ is orthonormal subspace basis.*
+where $U$ is orthonormal subspace basis.
 
 ### Bayesian
 
@@ -307,19 +307,19 @@ As a result, it creates models that are not just point estimates but full distri
   
 $$\mathcal{L}_{\text{MAP}} = -\log p(\mathcal{D}\mid w) - \log p(w)\;\approx\; \mathcal{L}_{\text{CE}} + \tfrac{\lambda}{2}\,\lVert w \rVert_2^2$$
 
-*where the MAP approximation equals L2 regularization specifically under a Gaussian prior on weights. Note: different priors yield different regularization forms.*
+where the MAP approximation equals L2 regularization specifically under a Gaussian prior on weights. Note: different priors yield different regularization forms.
 
 #### Variational
 
 $$\mathcal{L}_{\text{VI}} = \mathbb{E}_{q(w)}\big[ -\log p(\mathcal{D}\mid w) \big] + \mathrm{KL}\big(q(w)\,\|\, p(w)\big)$$
 
-*where $q(w)$ is variational posterior, $\mathrm{KL}$ is Kullback-Leibler divergence.*
+where $q(w)$ is variational posterior, $\mathrm{KL}$ is Kullback-Leibler divergence.
 
 #### Spike-and-slab
   
 $$p(w_i) = \pi\,\delta(w_i) + (1-\pi)\,\mathcal{N}(w_i; 0, \sigma^2),\quad \mathcal{L}= -\log p(\mathcal{D}\mid w) - \sum_i \log p(w_i)$$
 
-*where $\pi$ is spike probability, $\delta$ is Dirac delta, $\mathcal{N}$ is normal distribution, $\sigma$ is standard deviation.*
+where $\pi$ is spike probability, $\delta$ is Dirac delta, $\mathcal{N}$ is normal distribution, $\sigma$ is standard deviation.
 
 ### Domain
 
@@ -333,19 +333,19 @@ Some examples include:
   
 $$\mathcal{L}_{\text{Lap}} = \tfrac{1}{2}\sum_{i,j} A_{ij}\,\lVert f_i - f_j \rVert_2^2 \;=\; \mathrm{Tr}(F^\top L F)$$
 
-*where $A_{ij}$ is adjacency matrix, $f_i$ are node features, $F$ is feature matrix, $L$ is Laplacian matrix.*
+where $A_{ij}$ is adjacency matrix, $f_i$ are node features, $F$ is feature matrix, $L$ is Laplacian matrix.*
 
 #### Temporal
   
 $$\mathcal{L}_{\text{Temp}} = \sum_{t} \lVert f_{t+1} - f_t \rVert_2^2$$
 
-*where $t$ indexes time steps, $f_t$ are features at time $t$.*
+where $t$ indexes time steps, $f_t$ are features at time $t$.*
 
 #### Spatial smoothness
   
 $$\mathcal{L}_{\text{Spatial}} = \sum_{i}\sum_{n\in \mathcal{N}(i)} \lVert f_i - f_n \rVert_2^2 \;\;\text{or}\;\; \lambda\int \lVert \nabla f(x) \rVert_2^2\,dx$$
 
-*where $\mathcal{N}(i)$ are neighbors of node $i$, $\nabla$ denotes spatial gradient.*
+where $\mathcal{N}(i)$ are neighbors of node $i$, $\nabla$ denotes spatial gradient.*
 
 ## Applications
 
