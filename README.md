@@ -287,7 +287,7 @@ $$\mathcal{L}_{\text{Center}} = \tfrac{1}{2}\sum_i \lVert x_i - c_{y_i} \rVert_2
 
 #### Manifold
   
-$$\mathcal{L}_{\text{Manifold}} = \tfrac{1}{2}\sum_{i,j} S_{ij}\,\lVert z_i - z_j \rVert_2^2 \;=\; \operatorname{Tr}(Z^\top L Z)$$
+$$\mathcal{L}_{\text{Manifold}} = \tfrac{1}{2}\sum_{i,j} S_{ij}\,\lVert z_i - z_j \rVert_2^2 \;=\; \mathrm{Tr}(Z^\top L Z)$$
 
 *where $S_{ij}$ is similarity matrix, $Z$ is embedding matrix, $L$ is graph Laplacian.*
 
@@ -310,10 +310,10 @@ $$\mathcal{L}_{\text{MAP}} = -\log p(\mathcal{D}\mid w) - \log p(w)\;\approx\; \
 *where the MAP approximation equals L2 regularization specifically under a Gaussian prior on weights. Note: different priors yield different regularization forms.*
 
 #### Variational
-  
-$$\mathcal{L}_{\text{VI}} = \mathbb{E}_{q(w)}\big[ -\log p(\mathcal{D}\mid w) \big] + \operatorname{KL}\big(q(w)\,\|\, p(w)\big)$$
 
-*where $q(w)$ is variational posterior, $\operatorname{KL}$ is Kullback-Leibler divergence.*
+$$\mathcal{L}_{\text{VI}} = \mathbb{E}_{q(w)}\big[ -\log p(\mathcal{D}\mid w) \big] + \mathrm{KL}\big(q(w)\,\|\, p(w)\big)$$
+
+*where $q(w)$ is variational posterior, $\mathrm{KL}$ is Kullback-Leibler divergence.*
 
 #### Spike-and-slab
   
@@ -331,7 +331,7 @@ Some examples include:
 
 #### Graph Laplacian
   
-$$\mathcal{L}_{\text{Lap}} = \tfrac{1}{2}\sum_{i,j} A_{ij}\,\lVert f_i - f_j \rVert_2^2 \;=\; \operatorname{Tr}(F^\top L F)$$
+$$\mathcal{L}_{\text{Lap}} = \tfrac{1}{2}\sum_{i,j} A_{ij}\,\lVert f_i - f_j \rVert_2^2 \;=\; \mathrm{Tr}(F^\top L F)$$
 
 *where $A_{ij}$ is adjacency matrix, $f_i$ are node features, $F$ is feature matrix, $L$ is Laplacian matrix.*
 
