@@ -2,7 +2,7 @@
 
 ![Cover: Macbeth by John Martin, 1820](cover.jpg)
 
-Regularization is a very important technique in machine learning. It helps to both prevent overfitting and speed up convergence time. In this project, we will explore all of the most important types of regularization techniques and then implement them.
+Regularization is a very important technique in machine learning. It helps both to prevent overfitting and to speed up convergence. In this project, we will explore all of the most important types of regularization techniques and then implement them.
 
 - [Regularization](#regularization)
   - [Motivation](#motivation)
@@ -52,12 +52,6 @@ Regularization is a very important technique in machine learning. It helps to bo
       - [Bayesian](#bayesian-1)
       - [Variational](#variational)
       - [Spike-and-slab](#spike-and-slab)
-    - [Domain](#domain)
-      - [Graph Laplacian](#graph-laplacian)
-      - [Temporal](#temporal)
-      - [Spatial smoothness](#spatial-smoothness)
-  - [Applications](#applications)
-  - [Project Structure](#project-structure)
   - [Installation](#installation)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
@@ -65,7 +59,7 @@ Regularization is a very important technique in machine learning. It helps to bo
 
 ## Motivation
 
-When training a complex (or even simple) model, there is a risk of overfitting the training data. Since the model is trying to aggressively reduce the loss, it will try to get as close to every point as possible. But this might create a curve that's "too specific" to the particular data. This increases training time since, with every iteration, we get closer to the exact curve that absolutely minimizes the loss, and also creates overfitting.
+When training a complex (or even simple) model, there is a risk of overfitting the training data. Since the model is trying to aggressively reduce the loss, it will try to get as close to every point as possible. This might create a curve that's "too specific" to the particular data. This increases training time since, with every iteration, we get closer to the exact curve that minimizes the loss, and also creates overfitting.
 
 By adding regularization, we try to *constrain* the training process. The function becomes less flexible, but this trade-off often makes it more accurate in the real world.
 
@@ -101,7 +95,7 @@ where $w_i$ are individual weight components.
   
 $$\mathcal{L}_{\text{reg}} = \tfrac{\lambda}{2}\,\lVert w \rVert_2^2 = \tfrac{\lambda}{2}\sum_i w_i^2$$
 
-where the 1/2 factor simplifies gradient computation.
+where the $1/2$ factor simplifies gradient computation.
 
 #### Elastic Net
   
@@ -133,7 +127,7 @@ Noise-based regularization intentionally adds random noise to the data or model 
 
 #### Dropout
 
-Dropout is a technique where during training, we randomly "drop out" (set to zero) a fraction of the neurons in each layer. This prevents the network from relying too heavily on any single neuron and encourages redundancy. When we have this redundancy, any small number of neurons is more likely to accurately predict the output. Thus, they also 'balance' each other out, which forms a more robust model. At test time, we need to scale the weights by the dropout probability to maintain the expected output.
+Dropout is a technique where, during training, we randomly "drop out" (set to zero) a fraction of the neurons in each layer. This prevents the network from relying too heavily on any single neuron and encourages redundancy. When we have this redundancy, any small number of neurons is more likely to accurately predict the output. Thus, they also 'balance' each other out, which forms a more robust model. At test time, we scale the weights by the dropout probability to maintain the expected output.
 
 #### DropConnect
 
@@ -149,11 +143,11 @@ We add random noise to the inputs, activations, or even gradients during trainin
 
 ### Data
 
-Data-based regularization changes the training data itself. We can add random 'noise features' that don't exist in real life and don't predict anything, we can create synthetic features that are a combination of real features, create adverserial permutations, or scale the data.
+Data-based regularization changes the training data itself. We can add random 'noise features' that don't exist in real life and don't predict anything, create synthetic features that are combinations of real features, create adversarial permutations, or scale the data.
 
 Oftentimes, this type of regularization happens implicitly during data preprocessing. However, it's not the same as data cleaning, feature engineering, or augmentation.
 
-Although many different types of models can benefit from this type of regularization, it's not very commonly used, especially not in simple applications.
+Although many types of models can benefit from this regularization, it's not very commonly used, especially not in simple applications.
 
 #### Data augmentation
 
@@ -175,13 +169,13 @@ We generate adversarial examples by adding small perturbations to inputs that fo
 
 Early stopping treats overfitting as a temporal problem. Instead of changing the model or the data, it changes *when* we stop training.
 
-Early stopping modifies the learning algorithm itself (whether it be gradient descent or something else) to stop when certain conditions are reached (i.e. the model is 'accurate enough', or validation performance stops improving).
+Early stopping modifies the learning algorithm itself (whether it be gradient descent or something else) to stop when certain conditions are reached (i.e., the model is 'accurate enough', or validation performance stops improving).
 
 Early stopping is one of the most widely used and effective regularizers in neural network training. It's simple to implement and requires minimal tuning compared to other methods.
 
 #### Early stopping
 
-Early stopping monitors the average loss during training and stops when we get close to convergence, after some pre-set hyperparameter of epochs (for example) is reached. This prevents overfitting by not letting the model train for too long. It's not particularly fancy, it just simply stops training early.
+Early stopping monitors the average loss during training and stops when we get close to convergence, after some pre-set hyperparameter of epochs is reached. This prevents overfitting by not letting the model train for too long. It just simply stops training early.
 
 #### Learning rate schedules
 
@@ -195,11 +189,11 @@ Optimizers like Adam or RMSProp adapt the learning rate for each parameter based
 
 Architectural regularization changes the very structure of the model. Instead of tweaking the data or the loss, we redesign the model from the ground up. For example, we may force certain neurons to have the exact same weights as other neurons. We may force the data to take certain 'paths' when being processed. Many other techniques can be deployed.
 
-This type of regularization requires a very high degree of domain knowledge and should be deployed in accuracy-critical applications. There are no specific formulas, rather we aim to create architectural simplicity in the model itself.
+This type of regularization requires a high degree of domain knowledge and should be deployed in accuracy-critical applications. There are no specific formulas; rather, we aim to create architectural simplicity in the model itself.
 
 #### Weight tying
 
-Weight tying shares parameters between different parts of the model, like tying encoder and decoder weights in autoencoders. This reduces the number of parameters to learn and can improve generalization by enforcing symmetry in the model. Once again, the model stops being hyper-specific to the details of the data and is forced to reflect real-world relations.
+Weight tying shares parameters between different parts of the model, like tying encoder and decoder weights in autoencoders. This reduces the number of parameters to learn and can improve generalization by enforcing symmetry in the model. The model stops being hyper-specific to the details of the data and is forced to reflect real-world relations.
 
 #### Sparse connectivity
 
@@ -207,7 +201,7 @@ Instead of fully connected layers, we use sparse connections, where each neuron 
 
 #### Low-rank factorization
 
-We approximate weight matrices as products of lower-rank matrices. For example, a matrix $W ≈ U V^T$ where $U$ and $V$ have fewer columns. This reduces the number of parameters and can capture the essential structure while regularizing against overfitting.
+We approximate weight matrices as products of lower-rank matrices. For example, a matrix $W \approx U V^\top$ where $U$ and $V$ have fewer columns. This reduces the number of parameters and can capture the essential structure while regularizing against overfitting.
 
 #### Pruning
 
@@ -215,7 +209,7 @@ After training, we remove (set to zero) weights that are below a certain thresho
 
 ### Output
 
-The goal of output regularization is to smoothing the target outputs and uncertainty estimates. For example, when a model is very confident but ends up being very wrong, it is penalized extra heavily. This forces it to be more cautious and adapt better to rare or difficult cases. It also gives it more room to be 'lenient' in ranges where we have a lot of data (prevents biasing towards current noise).
+The goal of output regularization is to smooth the target outputs and uncertainty estimates. For example, when a model is very confident but ends up being very wrong, it is penalized extra heavily. This forces it to be more cautious and adapt better to rare or difficult cases. It also gives it more room to be 'lenient' in ranges where we have a lot of data (prevents biasing towards current noise).
 
 #### Label smoothing
   
@@ -229,7 +223,7 @@ where $\varepsilon$ is smoothing parameter, $K$ is number of classes, $\tilde{y}
 
 #### Confidence Penalty
   
-$$\mathcal{L}_{\text{CP}} = \mathcal{L}_{\text{CE}} - \beta\,\mathcal{H}(p)\;=\; -\sum_k y_k\log p_k\; +\; \beta\sum_k p_k\log p_k$$
+$$\mathcal{L}_{\text{CP}} = \mathcal{L}_{\text{CE}} - \beta\,\mathcal{H}(p) = -\sum_k y_k\log p_k + \beta\sum_k p_k\log p_k$$
 
 where $\beta$ controls entropy penalty, $\mathcal{H}(p)$ is prediction entropy.
 
@@ -241,7 +235,7 @@ where $\alpha_t$ is class weight, $\gamma$ focuses on hard examples, $p_t$ is pr
 
 ### Gradient
 
-Gradient regularization is a set of mathematical tricks that change the loss function itself with the intention of constraining the gradients. They add constraints on the gradients during training to stabilize the learning process. This prevents the model from changing too stochastically and converges to a more general solution. It's like adding the suspension system to the Cullinan.
+Gradient regularization is a set of mathematical tricks that change the loss function itself with the intention of constraining the gradients. They add constraints on the gradients during training to stabilize the learning process. This prevents the model from changing too stochastically and converges to a more general solution.
 
 #### Jacobian
   
@@ -263,9 +257,9 @@ where $c$ is maximum spectral norm.
 
 #### Gradient penalties
   
-$$\mathcal{L}_{\text{GP}} = \lambda\,\mathbb{E}_{\hat{x}}\big[\big(\lVert \nabla_{\hat{x}} D(\hat{x}) \rVert_2 - 1\big)^2\big]$$
+$$\mathcal{L}_{\text{GP}} = \lambda\,\mathbb{E}_{\hat{x}}\big[(\lVert \nabla_{\hat{x}} D(\hat{x}) \rVert_2 - 1)^2\big]$$
 
-where $\hat{x}$ are generated samples, $D$ is discriminator, $\nabla$ denotes gradient.*
+where $\hat{x}$ are generated samples, $D$ is discriminator, $\nabla$ denotes gradient.
 
 ### Representation
 
@@ -283,11 +277,11 @@ where $y$ is similarity label, $z_i, z_j$ are embeddings, $m$ is margin.
   
 $$\mathcal{L}_{\text{Center}} = \tfrac{1}{2}\sum_i \lVert x_i - c_{y_i} \rVert_2^2$$
 
-where $x_i$ are features, $c_{y_i}$ is center for class $y_i$.*
+where $x_i$ are features, $c_{y_i}$ is center for class $y_i$.
 
 #### Manifold
   
-$$\mathcal{L}_{\text{Manifold}} = \tfrac{1}{2}\sum_{i,j} S_{ij}\,\lVert z_i - z_j \rVert_2^2 \;=\; \mathrm{Tr}(Z^\top L Z)$$
+$$\mathcal{L}_{\text{Manifold}} = \tfrac{1}{2}\sum_{i,j} S_{ij}\,\lVert z_i - z_j \rVert_2^2 = \mathrm{Tr}(Z^\top L Z)$$
 
 where $S_{ij}$ is similarity matrix, $Z$ is embedding matrix, $L$ is graph Laplacian.
 
@@ -299,15 +293,15 @@ where $U$ is orthonormal subspace basis.
 
 ### Bayesian
 
-Bayesian regularization uses a Bayesian probabilistic philosophy to train the model. Basically, parameters are seen as uncertain, with the goal of reflecting prior knowledge acquired from learning. The optimization is directly modified to account for priors.
+Bayesian regularization uses a Bayesian probabilistic philosophy to train the model. Parameters are seen as uncertain, with the goal of reflecting prior knowledge acquired from learning. The optimization is directly modified to account for priors.
 
 As a result, it creates models that are not just point estimates but full distributions. For example, if we want to predict an artist's album sales, we may use prior knowledge about the artist's previous sales.
 
 #### Bayesian
   
-$$\mathcal{L}_{\text{MAP}} = -\log p(\mathcal{D}\mid w) - \log p(w)\;\approx\; \mathcal{L}_{\text{CE}} + \tfrac{\lambda}{2}\,\lVert w \rVert_2^2$$
+$$\mathcal{L}_{\text{MAP}} = -\log p(\mathcal{D}\mid w) - \log p(w) \approx \mathcal{L}_{\text{CE}} + \tfrac{\lambda}{2}\,\lVert w \rVert_2^2$$
 
-where the MAP approximation equals L2 regularization specifically under a Gaussian prior on weights. Note: different priors yield different regularization forms.
+where the MAP approximation equals L2 regularization specifically under a Gaussian prior on weights. Different priors yield different regularization forms.
 
 #### Variational
 
@@ -317,7 +311,10 @@ where $q(w)$ is variational posterior, $\mathrm{KL}$ is Kullback-Leibler diverge
 
 #### Spike-and-slab
   
-$$p(w_i) = \pi\,\delta(w_i) + (1-\pi)\,\mathcal{N}(w_i; 0, \sigma^2),\quad \mathcal{L}= -\log p(\mathcal{D}\mid w) - \sum_i \log p(w_i)$$
+$$p(w_i) = \pi\,\delta(w_i) + (1-\pi)\,\mathcal{N}(w_i; 
+```
+
+0, \sigma^2),\quad \mathcal{L}= -\log p(\mathcal{D}\mid w) - \sum_i \log p(w_i)$$
 
 where $\pi$ is spike probability, $\delta$ is Dirac delta, $\mathcal{N}$ is normal distribution, $\sigma$ is standard deviation.
 
@@ -325,41 +322,41 @@ where $\pi$ is spike probability, $\delta$ is Dirac delta, $\mathcal{N}$ is norm
 
 Domain regularization is when *you* create your own type of regularization depending on the domain of current work. It considers the relationships in the data and encodes those relationships into the loss. The goal is to respect natural patterns rather than learning generic constraints.
 
-When working with advanced systems, creating domain-specific regularization techniques will probably be the most effective way to come up with a solution where a completely novel or unique problem is being solved. Perhaps you want to reuse one of the more commonly known ones, or perhaps you want to design one tailored to your use case.
+When working with advanced systems, creating domain-specific regularization techniques will probably be the most effective way to solve completely novel or unique problems. Perhaps you want to reuse one of the more commonly known ones, or design one tailored to your use case.
 
 Some examples include:
 
 #### Graph Laplacian
-  
-$$\mathcal{L}_{\text{Lap}} = \tfrac{1}{2}\sum_{i,j} A_{ij}\,\lVert f_i - f_j \rVert_2^2 \;=\; \mathrm{Tr}(F^\top L F)$$
 
-where $A_{ij}$ is adjacency matrix, $f_i$ are node features, $F$ is feature matrix, $L$ is Laplacian matrix.*
+$$\mathcal{L}*{\text{Lap}} = \tfrac{1}{2}\sum*{i,j} A_{ij},\lVert f_i - f_j \rVert_2^2 = \mathrm{Tr}(F^\top L F)$$
+
+where $A_{ij}$ is adjacency matrix, $f_i$ are node features, $F$ is feature matrix, $L$ is Laplacian matrix.
 
 #### Temporal
-  
-$$\mathcal{L}_{\text{Temp}} = \sum_{t} \lVert f_{t+1} - f_t \rVert_2^2$$
 
-where $t$ indexes time steps, $f_t$ are features at time $t$.*
+$$\mathcal{L}*{\text{Temp}} = \sum*{t} \lVert f_{t+1} - f_t \rVert_2^2$$
+
+where $t$ indexes time steps, $f_t$ are features at time $t$.
 
 #### Spatial smoothness
-  
-$$\mathcal{L}_{\text{Spatial}} = \sum_{i}\sum_{n\in \mathcal{N}(i)} \lVert f_i - f_n \rVert_2^2 \;\;\text{or}\;\; \lambda\int \lVert \nabla f(x) \rVert_2^2\,dx$$
 
-where $\mathcal{N}(i)$ are neighbors of node $i$, $\nabla$ denotes spatial gradient.*
+$$\mathcal{L}*{\text{Spatial}} = \sum*{i}\sum_{n\in \mathcal{N}(i)} \lVert f_i - f_n \rVert_2^2 ;\text{or}; \lambda\int \lVert \nabla f(x) \rVert_2^2,dx$$
+
+where $\mathcal{N}(i)$ are neighbors of node $i$, $\nabla$ denotes spatial gradient.
 
 ## Applications
 
-In all sorts of machine learning, overfitting is a risk. As such, anywhere where it is a risk, regularization can and should be applied. There are so many examples that it would be unfair to only list a few. However, I'm still going to be unfair and list the following:
+In all sorts of machine learning, overfitting is a risk. Anywhere it is a risk, regularization can and should be applied. There are many examples; some of the most relevant:
 
-- All supervised learning tasks like neural/linear regression and classification
-- Unsupervised learning tasks like clustering and dimensionality reduction
-- Reinforcement learning tasks
-- Time series forecasting
-- Generative models
+* All supervised learning tasks like neural/linear regression and classification
+* Unsupervised learning tasks like clustering and dimensionality reduction
+* Reinforcement learning tasks
+* Time series forecasting
+* Generative models
 
 ## Project Structure
 
-- Will implement a PyTorch neural network that trains on some x, y, or z data. During training, we will pass in different types of regularization functions depending on the context.
+* Will implement a PyTorch neural network that trains on some x, y, or z data. During training, we will pass in different types of regularization functions depending on the context.
 
 ```md
 |
@@ -374,9 +371,9 @@ In all sorts of machine learning, overfitting is a risk. As such, anywhere where
 
 ### Prerequisites
 
-- a
-- b
-- c
+* a
+* b
+* c
 
 ### Setup
 
