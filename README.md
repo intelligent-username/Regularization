@@ -55,7 +55,6 @@ Regularization is a very important technique in machine learning. It helps both 
   - [Installation](#installation)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
-    - [License](#license)
 
 ## Motivation
 
@@ -311,7 +310,7 @@ where $q(w)$ is variational posterior, $\mathrm{KL}$ is Kullback-Leibler diverge
 
 #### Spike-and-slab
   
-$$p(w_i) = \pi\,\delta(w_i) + (1-\pi)\,\mathcal{N}(w_i; 
+$$p(w_i) = \pi\,\delta(w_i) + (1-\pi)\,\mathcal{N}(w_i;
 ```
 
 0, \sigma^2),\quad \mathcal{L}= -\log p(\mathcal{D}\mid w) - \sum_i \log p(w_i)$$
@@ -356,24 +355,98 @@ In all sorts of machine learning, overfitting is a risk. Anywhere it is a risk, 
 
 ## Project Structure
 
-* Will implement a PyTorch neural network that trains on some x, y, or z data. During training, we will pass in different types of regularization functions depending on the context.
+This project is going to implement different PyTorch neural networks that train on some data. Each one will train without regularization, and then with different types of regularization. The results will be compared.
+
+Plan:
+
+---
+
+### **1. MNIST**
+
+- Contains a bunch of handwritten digits (0-9) in grayscale, 28x28 pixels.
+- Will first train a simple fully-connected neural network (MLP) on MNIST without any regularization, and then with different types of regularization.
+
+  - **Norm-based:** L1, L2, Elastic Net on fully-connected networks.
+  - **Noise:** Dropout, DropConnect.
+  - **Data:** Data augmentation (rotations, translations), Mixup, Cutout.
+  - **Output:** Label smoothing.
+  - **Architectural:** Weight tying in fully connected layers or embeddings.
+  - **Gradient penalties:** Jacobian norm to smooth predictions.
+
+---
+
+### **2. CIFAR-10 (32×32 colour images, 10 classes)**
+
+- Small, colour images, more complex than MNIST; overfits if the network is slightly big.
+- Will train a small CNN on CIFAR-10 without regularization first, then apply different methods.
+
+  - **Norm-based:** Max-norm constraints on CNNs.
+  - **Noise:** Stochastic depth on ResNets.
+  - **Data:** Augmentations (flip, crop, colour jitter), Mixup, Cutout.
+  - **Architectural:** Sparse connectivity (pruning filters, channel sparsity).
+  - **Output:** Confidence penalty.
+  - **Representation:** Contrastive loss (self-supervised), center loss.
+  - **Domain / Graph Laplacian:** Could illustrate label propagation in graph-like versions of CIFAR.
+
+---
+
+### **3. Fashion-MNIST (28×28 grayscale, 10 classes of clothing)**
+
+- Same simplicity as MNIST but slightly harder; models still overfit easily.
+- Will train a simple MLP or small CNN without regularization first, then with different regularization.
+
+  - Same as MNIST, but differences in difficulty allow **highlighting where regularization becomes essential**.
+  - **Noise injection:** Gaussian noise on inputs.
+  - **Gradient-based:** Spectral norm constraints on convolutional layers.
+
+---
+
+### **4. Boston Housing / California Housing (tabular, regression tasks)**
+
+- Tiny tabular dataset; can overfit with fully-connected MLP.
+- Train a simple regression MLP without regularization, then experiment with penalties and priors.
+
+  - **Norm-based:** L1/L2 regression penalties.
+  - **Bayesian:** Variational or spike-and-slab priors.
+  - **Early stopping / adaptive optimizers:** improves generalization in regression.
+  - **Representation:** Subspace regularization (project weights to low-dimensional space).
+  - **Gradient penalties:** Jacobian penalties for smooth predictions.
+
+---
+
+### **5. UCI Wine / Iris datasets (classification, tabular)**
+
+- Extremely small, easy to overfit; perfect for showing clear differences with/without regularization.
+- Will train a tiny MLP or logistic regression baseline, then show improvements with regularization.
+
+  - **Norm-based:** L1/L2, group Lasso on feature groups.
+  - **Bayesian:** Small-scale spike-and-slab illustration.
+  - **Early stopping / learning rate schedules**: immediate effect visible.
+  - **Architectural:** Weight tying or low-rank factorization in small MLP.
+  - **Output:** Label smoothing.
+
+---
+
+### **Notes for Implementation in PyTorch**
+
+* All datasets are available via `torchvision.datasets` (for images) or can be loaded via `sklearn.datasets` (tabular).
+* Use **very small networks** (1–3 layers for tabular, small CNN for images) to exaggerate overfitting.
+* Train **without regularization first**. Log validation/test loss and accuracy.
+* Overfitting is almost guaranteed in MNIST/Fashion-MNIST/CIFAR-10 with small datasets and big networks; perfect for clear demonstration.
 
 ```md
-|
-|
-|
-|
-|
-|
+| MNIST         # Demo on the MNIST dataset
+| CF10          # Demo on the CIFAR-10 dataset
+| FMNIST        # Demo on the Fashion-MNIST dataset
+| BH            # Demo on the Boston Housing dataset
+| UCIW          # Demo on the UCI Wine dataset
 ```
 
 ## Installation
 
 ### Prerequisites
 
-* a
-* b
-* c
+* Python 3.8+
 
 ### Setup
 
@@ -384,8 +457,15 @@ git clone https://github.com/intelligent-username/Regularization
 cd Regularization
 ```
 
-[More stuff once I actually implement :)]
+Install the prerequisites:
 
-### License
+```bash
+# Create a virtual environment first, if you like (also I recommend this)
+pip install -r requirements.txt
+```
 
-MIT
+Run the demos in ipynb files or scripts. Or just read them
+
+---
+
+This project is licensed under the [MIT License](LICENSE).
