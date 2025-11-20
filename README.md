@@ -63,7 +63,7 @@ Regularization is a very important technique in machine learning. It helps both 
     - [**3. Fashion-MNIST (28×28 grayscale, 10 classes of clothing)**](#3-fashion-mnist-2828-grayscale-10-classes-of-clothing)
     - [**4. Boston Housing / California Housing (tabular, regression tasks)**](#4-boston-housing--california-housing-tabular-regression-tasks)
     - [**5. UCI Wine / Iris datasets (classification, tabular)**](#5-uci-wine--iris-datasets-classification-tabular)
-    - [**Notes for Implementation in PyTorch**](#notes-for-implementation-in-pytorch)
+    - [Some Notes on the Implementation](#some-notes-on-the-implementation)
   - [Installation](#installation)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
@@ -324,7 +324,7 @@ where $q(w)$ is variational posterior, $\mathrm{KL}$ is Kullback-Leibler diverge
   
 $$p(w_i) = \pi\,\delta(w_i) + (1-\pi)\,\mathcal{N}(w_i; 0, \sigma^2),\quad \mathcal{L}= -\log p(\mathcal{D}\mid w) - \sum_i \log p(w_i)$$
 
-*where $\pi$ is spike probability, $\delta$ is Dirac delta, $\mathcal{N}$ is normal distribution, $\sigma$ is standard deviation.*
+where $\pi$ is spike probability, $\delta$ is Dirac delta, $\mathcal{N}$ is normal distribution, $\sigma$ is standard deviation.*
 
 ### Domain
 
@@ -338,29 +338,29 @@ Some examples include:
   
 $$\mathcal{L}_{\text{Lap}} = \tfrac{1}{2}\sum_{i,j} A_{ij}\,\lVert f_i - f_j \rVert_2^2 \;=\; \mathrm{Tr}(F^\top L F)$$
 
-*where $A_{ij}$ is adjacency matrix, $f_i$ are node features, $F$ is feature matrix, $L$ is Laplacian matrix.*
+where $A_{ij}$ is adjacency matrix, $f_i$ are node features, $F$ is feature matrix, $L$ is Laplacian matrix.*
 
 #### Temporal
   
 $$\mathcal{L}_{\text{Temp}} = \sum_{t} \lVert f_{t+1} - f_t \rVert_2^2$$
 
-*where $t$ indexes time steps, $f_t$ are features at time $t$.*
+where $t$ indexes time steps, $f_t$ are features at time $t$.*
 
 #### Spatial smoothness
   
 $$\mathcal{L}_{\text{Spatial}} = \sum_{i}\sum_{n\in \mathcal{N}(i)} \lVert f_i - f_n \rVert_2^2 \;\;\text{or}\;\; \lambda\int \lVert \nabla f(x) \rVert_2^2\,dx$$
 
-*where $\mathcal{N}(i)$ are neighbors of node $i$, $\nabla$ denotes spatial gradient.*
+where $\mathcal{N}(i)$ are neighbors of node $i$, $\nabla$ denotes spatial gradient.*
 
 ## Applications
 
-In all sorts of machine learning, overfitting is a risk. Anywhere it is a risk, regularization can and should be applied. There are many examples; some of the most relevant:
+In all sorts of machine learning tasks, overfitting is a real risk. Anywhere it is a risk, regularization can and should be applied. There are many examples; some of the most relevant:
 
-* All supervised learning tasks like neural/linear regression and classification
-* Unsupervised learning tasks like clustering and dimensionality reduction
-* Reinforcement learning tasks
-* Time series forecasting
-* Generative models
+- All supervised learning tasks like neural/linear regression and classification
+- Unsupervised learning tasks like clustering and dimensionality reduction
+- Reinforcement learning tasks
+- Time series forecasting
+- Generative models
 
 ## Project Structure
 
@@ -436,26 +436,30 @@ Plan:
 
 ---
 
-### **Notes for Implementation in PyTorch**
+### Some Notes on the Implementation
 
-* All datasets are available via `torchvision.datasets` (for images) or can be loaded via `sklearn.datasets` (tabular).
-* Use **very small networks** (1–3 layers for tabular, small CNN for images) to exaggerate overfitting.
-* Train **without regularization first**. Log validation/test loss and accuracy.
-* Overfitting is almost guaranteed in MNIST/Fashion-MNIST/CIFAR-10 with small datasets and big networks; perfect for clear demonstration.
+- All datasets are available via `torchvision.datasets` (for images) or can be loaded via `sklearn.datasets` (tabular).
+- Use **very small networks** (1–3 layers for tabular, small CNN for images) to exaggerate overfitting.
+- Train **without regularization first**. Log validation/test loss and accuracy.
+- Overfitting is almost guaranteed in MNIST/Fashion-MNIST/CIFAR-10 with small datasets and big networks; perfect for clear demonstration.
 
 ```md
-| MNIST         # Demo on the MNIST dataset
-| CF10          # Demo on the CIFAR-10 dataset
-| FMNIST        # Demo on the Fashion-MNIST dataset
-| BH            # Demo on the Boston Housing dataset
-| UCIW          # Demo on the UCI Wine dataset
+├── MNIST/              # Demo on the MNIST dataset
+├── CF10/               # Demo on the CIFAR-10 dataset
+├── FMNIST/             # Demo on the Fashion-MNIST dataset
+├── BH/                 # Demo on the Boston Housing dataset
+├── UCIW/               # Demo on the UCI Wine dataset
+├── cover.jpg          # Cover image
+├── LICENSE             # License information
+├── README.md           # This file
+└── requirements.txt    # Prerequisites
 ```
 
 ## Installation
 
 ### Prerequisites
 
-* Python 3.8+
+- Python 3.8+
 
 ### Setup
 
@@ -473,7 +477,7 @@ Install the prerequisites:
 pip install -r requirements.txt
 ```
 
-Run the demos in ipynb files or scripts. Or just read them
+Run the demos in ipynb files or scripts. Or just read them.
 
 ---
 
