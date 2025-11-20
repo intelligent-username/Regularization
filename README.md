@@ -52,6 +52,18 @@ Regularization is a very important technique in machine learning. It helps both 
       - [Bayesian](#bayesian-1)
       - [Variational](#variational)
       - [Spike-and-slab](#spike-and-slab)
+    - [Domain](#domain)
+      - [Graph Laplacian](#graph-laplacian)
+      - [Temporal](#temporal)
+      - [Spatial smoothness](#spatial-smoothness)
+  - [Applications](#applications)
+  - [Project Structure](#project-structure)
+    - [**1. MNIST**](#1-mnist)
+    - [**2. CIFAR-10 (32×32 colour images, 10 classes)**](#2-cifar-10-3232-colour-images-10-classes)
+    - [**3. Fashion-MNIST (28×28 grayscale, 10 classes of clothing)**](#3-fashion-mnist-2828-grayscale-10-classes-of-clothing)
+    - [**4. Boston Housing / California Housing (tabular, regression tasks)**](#4-boston-housing--california-housing-tabular-regression-tasks)
+    - [**5. UCI Wine / Iris datasets (classification, tabular)**](#5-uci-wine--iris-datasets-classification-tabular)
+    - [**Notes for Implementation in PyTorch**](#notes-for-implementation-in-pytorch)
   - [Installation](#installation)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
@@ -310,12 +322,9 @@ where $q(w)$ is variational posterior, $\mathrm{KL}$ is Kullback-Leibler diverge
 
 #### Spike-and-slab
   
-$$p(w_i) = \pi\,\delta(w_i) + (1-\pi)\,\mathcal{N}(w_i;
-```
+$$p(w_i) = \pi\,\delta(w_i) + (1-\pi)\,\mathcal{N}(w_i; 0, \sigma^2),\quad \mathcal{L}= -\log p(\mathcal{D}\mid w) - \sum_i \log p(w_i)$$
 
-0, \sigma^2),\quad \mathcal{L}= -\log p(\mathcal{D}\mid w) - \sum_i \log p(w_i)$$
-
-where $\pi$ is spike probability, $\delta$ is Dirac delta, $\mathcal{N}$ is normal distribution, $\sigma$ is standard deviation.
+*where $\pi$ is spike probability, $\delta$ is Dirac delta, $\mathcal{N}$ is normal distribution, $\sigma$ is standard deviation.*
 
 ### Domain
 
@@ -326,22 +335,22 @@ When working with advanced systems, creating domain-specific regularization tech
 Some examples include:
 
 #### Graph Laplacian
+  
+$$\mathcal{L}_{\text{Lap}} = \tfrac{1}{2}\sum_{i,j} A_{ij}\,\lVert f_i - f_j \rVert_2^2 \;=\; \mathrm{Tr}(F^\top L F)$$
 
-$$\mathcal{L}*{\text{Lap}} = \tfrac{1}{2}\sum*{i,j} A_{ij},\lVert f_i - f_j \rVert_2^2 = \mathrm{Tr}(F^\top L F)$$
-
-where $A_{ij}$ is adjacency matrix, $f_i$ are node features, $F$ is feature matrix, $L$ is Laplacian matrix.
+*where $A_{ij}$ is adjacency matrix, $f_i$ are node features, $F$ is feature matrix, $L$ is Laplacian matrix.*
 
 #### Temporal
+  
+$$\mathcal{L}_{\text{Temp}} = \sum_{t} \lVert f_{t+1} - f_t \rVert_2^2$$
 
-$$\mathcal{L}*{\text{Temp}} = \sum*{t} \lVert f_{t+1} - f_t \rVert_2^2$$
-
-where $t$ indexes time steps, $f_t$ are features at time $t$.
+*where $t$ indexes time steps, $f_t$ are features at time $t$.*
 
 #### Spatial smoothness
+  
+$$\mathcal{L}_{\text{Spatial}} = \sum_{i}\sum_{n\in \mathcal{N}(i)} \lVert f_i - f_n \rVert_2^2 \;\;\text{or}\;\; \lambda\int \lVert \nabla f(x) \rVert_2^2\,dx$$
 
-$$\mathcal{L}*{\text{Spatial}} = \sum*{i}\sum_{n\in \mathcal{N}(i)} \lVert f_i - f_n \rVert_2^2 ;\text{or}; \lambda\int \lVert \nabla f(x) \rVert_2^2,dx$$
-
-where $\mathcal{N}(i)$ are neighbors of node $i$, $\nabla$ denotes spatial gradient.
+*where $\mathcal{N}(i)$ are neighbors of node $i$, $\nabla$ denotes spatial gradient.*
 
 ## Applications
 
