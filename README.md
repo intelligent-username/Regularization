@@ -444,15 +444,16 @@ Plan:
 - Overfitting is almost guaranteed in MNIST/Fashion-MNIST/CIFAR-10 with small datasets and big networks; perfect for clear demonstration.
 
 ```md
-├── MNIST/              # Demo on the MNIST dataset
-├── CF10/               # Demo on the CIFAR-10 dataset
-├── FMNIST/             # Demo on the Fashion-MNIST dataset
-├── BH/                 # Demo on the Boston Housing dataset
-├── UCIW/               # Demo on the UCI Wine dataset
-├── cover.jpg          # Cover image
+├── MNIST/              # First Demo
+├── CF10/               # Second Demo
+├── FMNIST/             # Third Demo
+├── BH/                 # Fourth Demo
+├── UCIW/               # Fifth Demo
+├── .gitignore          # Stuff git will leave out
+├── cover.jpg           # Cover image
 ├── LICENSE             # License information
 ├── README.md           # This file
-└── requirements.txt    # Prerequisites
+└── requirements.txt    # Python prerequisites
 ```
 
 ## Installation
