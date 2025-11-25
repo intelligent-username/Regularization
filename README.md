@@ -59,10 +59,10 @@ Regularization is a very important technique in machine learning. It helps both 
   - [Applications](#applications)
   - [Project Structure](#project-structure)
     - [**1. MNIST**](#1-mnist)
-    - [**2. CIFAR-10 (32×32 colour images, 10 classes)**](#2-cifar-10-3232-colour-images-10-classes)
-    - [**3. Fashion-MNIST (28×28 grayscale, 10 classes of clothing)**](#3-fashion-mnist-2828-grayscale-10-classes-of-clothing)
-    - [**4. Boston Housing / California Housing (tabular, regression tasks)**](#4-boston-housing--california-housing-tabular-regression-tasks)
-    - [**5. UCI Wine / Iris datasets (classification, tabular)**](#5-uci-wine--iris-datasets-classification-tabular)
+    - [**2. CIFAR-10**](#2-cifar-10)
+    - [**3. Fashion-MNIST**](#3-fashion-mnist)
+    - [**4. California Housing Dataset**](#4-california-housing-dataset)
+    - [**5. UCI Wine datasets (Classification)**](#5-uci-wine-datasets-classification)
     - [Some Notes on the Implementation](#some-notes-on-the-implementation)
   - [Installation](#installation)
     - [Prerequisites](#prerequisites)
@@ -366,7 +366,7 @@ In all sorts of machine learning tasks, overfitting is a real risk. Anywhere it 
 
 This project is going to implement different PyTorch neural networks that train on some data. Each one will train without regularization, and then with different types of regularization. The results will be compared.
 
-Plan:
+This is the plan right now:
 
 ---
 
@@ -384,7 +384,7 @@ Plan:
 
 ---
 
-### **2. CIFAR-10 (32×32 colour images, 10 classes)**
+### **2. CIFAR-10**
 
 - Small, colour images, more complex than MNIST; overfits if the network is slightly big.
 - Will train a small CNN on CIFAR-10 without regularization first, then apply different methods.
@@ -399,7 +399,7 @@ Plan:
 
 ---
 
-### **3. Fashion-MNIST (28×28 grayscale, 10 classes of clothing)**
+### **3. Fashion-MNIST**
 
 - Same simplicity as MNIST but slightly harder; models still overfit easily.
 - Will train a simple MLP or small CNN without regularization first, then with different regularization.
@@ -410,7 +410,7 @@ Plan:
 
 ---
 
-### **4. Boston Housing / California Housing (tabular, regression tasks)**
+### **4. California Housing Dataset**
 
 - Tiny tabular dataset; can overfit with fully-connected MLP.
 - Train a simple regression MLP without regularization, then experiment with penalties and priors.
@@ -423,7 +423,7 @@ Plan:
 
 ---
 
-### **5. UCI Wine / Iris datasets (classification, tabular)**
+### **5. UCI Wine datasets (Classification)**
 
 - Extremely small, easy to overfit; perfect for showing clear differences with/without regularization.
 - Will train a tiny MLP or logistic regression baseline, then show improvements with regularization.
@@ -474,7 +474,18 @@ cd Regularization
 Install the prerequisites:
 
 ```bash
-# Create a virtual environment first, if you like (also I recommend this)
+# Create a virtual environment first (recommended)
+python -m venv venv
+# Activate it:
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+```
+
+Then install the required packages:
+
+```bash
 pip install -r requirements.txt
 ```
 
