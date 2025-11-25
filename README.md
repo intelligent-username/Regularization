@@ -364,6 +364,19 @@ In all sorts of machine learning tasks, overfitting is a real risk. Anywhere it 
 
 ## Project Structure
 
+```md
+├── MNIST/              # First Demo
+├── CF10/               # Second Demo
+├── FMNIST/             # Third Demo
+├── BH/                 # Fourth Demo
+├── UCIW/               # Fifth Demo
+├── .gitignore          # Stuff git will leave out
+├── cover.jpg           # Cover image
+├── LICENSE             # License information
+├── README.md           # This file
+└── requirements.txt    # Python prerequisites
+```
+
 This project is going to implement different PyTorch neural networks that train on some data. Each one will train without regularization, and then with different types of regularization. The results will be compared.
 
 This is the plan right now:
@@ -442,19 +455,6 @@ This is the plan right now:
 - Use **very small networks** (1–3 layers for tabular, small CNN for images) to exaggerate overfitting.
 - Train **without regularization first**. Log validation/test loss and accuracy.
 - Overfitting is almost guaranteed in MNIST/Fashion-MNIST/CIFAR-10 with small datasets and big networks; perfect for clear demonstration.
-
-```md
-├── MNIST/              # First Demo
-├── CF10/               # Second Demo
-├── FMNIST/             # Third Demo
-├── BH/                 # Fourth Demo
-├── UCIW/               # Fifth Demo
-├── .gitignore          # Stuff git will leave out
-├── cover.jpg           # Cover image
-├── LICENSE             # License information
-├── README.md           # This file
-└── requirements.txt    # Python prerequisites
-```
 
 ## Installation
 
