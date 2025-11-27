@@ -476,9 +476,12 @@ Install the prerequisites:
 ```bash
 # Create a virtual environment first (recommended)
 python -m venv venv
+
 # Activate it:
+
 # On Windows:
 venv\Scripts\activate
+
 # On macOS/Linux:
 source venv/bin/activate
 ```
