@@ -460,7 +460,7 @@ This is the plan right now:
 
 ### Prerequisites
 
-- Python 3.8+
+- Preferrably Python 3.10
 
 ### Setup
 
@@ -474,7 +474,16 @@ cd Regularization
 Install the prerequisites:
 
 ```bash
+
 # Create a virtual environment first (recommended)
+
+# On Conda:
+conda create -n environment.yaml
+conda activate regularization
+
+
+# Using regular Python.venv:
+
 python -m venv venv
 
 # Activate it:
@@ -489,7 +498,7 @@ source venv/bin/activate
 Then install the required packages:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt # only required if not using conda
 ```
 
 Run the demos in ipynb files or scripts. Or just read them.
