@@ -1,3 +1,6 @@
-torch
 tensorflow
-sklearn
+torch
+scikit-learn
+numpy
+pandas
+matplotlib
