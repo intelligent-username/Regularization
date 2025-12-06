@@ -6,7 +6,7 @@ dependencies:
   - python=3.11
   - tensorflow
   - torch
-  - cudatoolkit=12.2      # Only b/c torch doesn't ship w/ it on conda 
+  - cudatoolkit=12.2      # b/c torch doesn't ship w/ it on conda 
   - scikit-learn
   - numpy
   - pandas
