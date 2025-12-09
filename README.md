@@ -419,7 +419,7 @@ This is the plan right now:
 
   - Same as MNIST, but differences in difficulty allow **highlighting where regularization becomes essential**.
   - **Noise injection:** Gaussian noise on inputs.
-  - **Gradient-based:** Spectral norm constraints on convolutional layers.
+  - **Gradient-based** spectral norm constraints on convolutional layers.
 
 ---
 

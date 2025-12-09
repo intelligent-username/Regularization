@@ -17,3 +17,12 @@ The model will be a simple MLP with dense layers for regression. The final outpu
 ## Structure
 
 `demo.ipynb` will contain the code for importing the data, defining the model, training, and evaluating it. Different `.py` files will then implement the regularization techniques we're trying to demonstrate, and `regularized.ipynb` will contain the code to run experiments with different regularization methods. `Comparator.ipynb` will then put all of the results side-by-side for comparison.
+
+With this setup, we will test out:
+
+- Norm-based Regularization
+- Bayesian Regularization
+- Early Stopping / Adaptive Optimizers
+- Representation-based Regularization
+- Gradient Penalty-based Regularization
+- And others as needed.

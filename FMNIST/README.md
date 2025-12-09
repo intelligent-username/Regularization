@@ -15,3 +15,10 @@ The model will be a simple CNN or MLP that has convolutional or dense layers, fo
 ## Structure
 
 `demo.ipynb` will contain the code for importing the data, defining the model, training, and evaluating it. Different `.py` files will then implement the regularization techniques we're trying to demonstrate, and `regularized.ipynb` will contain the code to run experiments with different regularization methods. `Comparator.ipynb` will then put all of the results side-by-side for comparison.
+
+With this setup, we will test out:
+
+- Noise Injection
+- Gradient Penalty-based Regularization
+- Architectural Regularization
+- And others as needed.
